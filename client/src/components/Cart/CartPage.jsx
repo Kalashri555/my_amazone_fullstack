@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 
+import config from '../../config.json';
 import UserContext from '../../contexts/UserContext';
 import './CartPage.css';
 import remove from '../../assets/delete.png';
@@ -13,18 +14,18 @@ import { toast } from 'react-toastify';
 
 
 const CartPage = () => {
-  const [subTotal, setSubTotal] = useState(0);
+
   const userObj = useContext(UserContext);
   const { cart, removeFromCart, updateCart, setCart } = useContext(CartContext);
 
-  useEffect(() => {
+ const subTotal = useMemo(() => {
     let total = 0;
     cart.forEach(item => {
       if (item && item.product && typeof item.product.price === 'number') {
         total += item.product.price * item.quantity;
       }
     });
-    setSubTotal(total);
+    return(total);
   }, [cart]);
 
 
@@ -46,7 +47,7 @@ const CartPage = () => {
         <img
           src={
             userObj?.profilePic
-              ? `http://localhost:5000/profile/${userObj.profilePic}`
+              ? `${config.backendURL}/profile/${userObj.profilePic}`
               : fallbackUser
           }
           alt="user profile"
