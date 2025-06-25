@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import './ProductCard.css'
 
-
+import config from "../../config.json"
 import star from "../../assets/glowing_star.png"
 import basket from "../../assets/Basket.png"
 import { NavLink } from 'react-router-dom'
@@ -19,7 +19,7 @@ const ProductCard = ({ product
    <article className='product_card'>
     <div className='product_image'>
      <NavLink to={`/product/${product?._id}`}>
-     <img src={`http://localhost:5000/products/${product?.images[0]}`} alt="product image" /></NavLink>
+     <img src={`${config.backendURL}/products/${product?.images[0]}`} alt="product image" /></NavLink>
     </div> 
 
     <div className='product_details'>
