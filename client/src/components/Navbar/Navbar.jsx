@@ -1,4 +1,7 @@
 import React, { use, useContext, useEffect, useState } from 'react';
+import {motion} from 'framer-motion';
+
+
 import './Navbar.css';
 import rocket from '../../assets/rocket.png';
 import star from '../../assets/glowing_star.png';
@@ -74,7 +77,11 @@ const Navbar = () => {
   console.log(suggestions);
 
   return (
-    <nav className="align_center navbar">
+   <motion.nav className="align_center navbar"
+     initial={{ opacity: 0, y: -30 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ duration: 1, ease: "easeInOut" }}
+    >
       <div className="align_center">
         <h1 className="navbar_heading">Amazone</h1>
         <form className="align_center navbar_form"
@@ -133,7 +140,7 @@ const Navbar = () => {
           </>
         )}
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
